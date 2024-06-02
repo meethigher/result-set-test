@@ -21,7 +21,7 @@ public class ResultSetTester extends SimpleApplication {
     public void run() throws Exception {
         MemoryMonitor memoryMonitor = new MemoryMonitor(500);
         memoryMonitor.start();
-        JdbcUtils jdbcUtils = new JdbcUtils();
+        JdbcUtils jdbcUtils = new JdbcUtils("jdbc:postgresql://10.0.0.9/resultset", "postgres", "postgres");
         ResultSetQueryPerformer performer = new ResultSetQueryPerformer(jdbcUtils, memoryMonitor);
         performer.startPlan1(startTime, endTime);
         performer.startPlan2(startTime, endTime);

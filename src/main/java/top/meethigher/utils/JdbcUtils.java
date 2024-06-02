@@ -42,17 +42,20 @@ public class JdbcUtils {
     private final int num = 30000_0000;
 
     public JdbcUtils() {
+        this("jdbc:postgresql://10.0.0.9/resultset","postgres","postgres");
+    }
+
+    public JdbcUtils(String jdbcUrl, String username, String password) {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://10.0.0.9/resultset");
-        config.setUsername("postgres");
-        config.setPassword("postgres");
+        config.setJdbcUrl(jdbcUrl);
+        config.setUsername(username);
+        config.setPassword(password);
         config.setMinimumIdle(5);
         config.setMaximumPoolSize(30);
         this.dataSource = new HikariDataSource(config);
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
         this.randomDataGenerator = new RandomDataGenerator(jdbcTemplate, 5000, fieldArray, tableName);
         preflight();
-
     }
 
     private void preflight() {
